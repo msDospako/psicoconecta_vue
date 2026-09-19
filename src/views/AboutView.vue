@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="about-illustration card">
-        <div class="big-mark">P</div>
+        <img class="about-logo" src="/logo-psicoconecta.svg" alt="Logotipo de PsicoConecta" />
         <p>Bienestar emocional · Guadalajara, Jalisco</p>
       </div>
     </div>
@@ -63,8 +63,9 @@
   <section class="section-pad">
     <div class="container quality-card card">
       <div>
-        <span class="eyebrow">Compromiso de calidad</span>
+        <span class="eyebrow">Política de calidad</span>
         <h2>Una experiencia de atención clara, confiable y centrada en las personas.</h2>
+        <p class="quality-copy">En PsicoConecta nos comprometemos a facilitar servicios de orientación psicológica con atención ética, confidencial y humana, mediante profesionales capacitados y procesos de mejora continua que prioricen el bienestar y la satisfacción de cada persona usuaria.</p>
       </div>
       <ul>
         <li>✓ Profesionales con formación y cédula profesional</li>
@@ -74,6 +75,26 @@
         <li>✓ Modalidad online y presencial</li>
         <li>✓ Opciones de atención para distintas necesidades</li>
       </ul>
+    </div>
+  </section>
+
+  <section id="ubicacion" class="section-pad soft-section location-section">
+    <div class="container location-grid">
+      <div>
+        <span class="eyebrow">Ubicación física</span>
+        <h2>Atención con sede en Guadalajara, Jalisco</h2>
+        <p class="lead small">PsicoConecta contempla atención presencial únicamente con cita previa en la zona metropolitana de Guadalajara, además de consultas en línea para ampliar su cobertura.</p>
+        <div class="location-details">
+          <p><strong>Modalidades:</strong> presencial y en línea</p>
+          <p><strong>Horario:</strong> lunes a sábado, de 9:00 a 20:00 h</p>
+          <p><strong>Acceso:</strong> la dirección de consulta se confirma al agendar</p>
+        </div>
+        <RouterLink class="btn btn-primary" to="/contacto">Solicitar información</RouterLink>
+      </div>
+      <div class="map-card card" aria-label="Referencia de ubicación en Guadalajara">
+        <span class="map-pin">⌖</span><strong>Guadalajara, Jalisco, México</strong>
+        <small>Ubicación de referencia del proyecto académico</small>
+      </div>
     </div>
   </section>
 </template>

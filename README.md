@@ -1,4 +1,4 @@
-# PsicoConecta 2.0 — Vue + Vite
+# PsicoConecta 2.1 — Vue + Vite
 
 Migración y rediseño del proyecto original PsicoConecta a Vue 3.
 
@@ -19,6 +19,17 @@ Migración y rediseño del proyecto original PsicoConecta a Vue 3.
 - Perfiles dinámicos de profesionales.
 - Agenda visual con selección de servicio, profesional, modalidad, fecha y hora.
 - Mejoras de accesibilidad y mensajes claros sobre el carácter académico del prototipo.
+- Identidad visual con logotipo SVG, icono y favicon.
+- Página institucional con misión, visión, política de calidad y ubicación.
+- Acceso administrativo simulado y panel de usuarios para evidenciar el Sprint 2.
+
+## Acceso para la asesoría
+
+- URL local: `http://localhost:5173/login`
+- Usuario: `asesor@psicoconecta.mx`
+- Contraseña: `Asesor2026!`
+
+El acceso se implementa con LocalStorage únicamente para fines académicos. Las credenciales están en el código del cliente y no son apropiadas para un sistema en producción.
 
 ## Estructura
 
@@ -33,7 +44,9 @@ src/
 │   └── ChatWidget.vue
 ├── data/
 │   ├── services.js
-│   └── psychologists.js
+│   ├── psychologists.js
+│   └── users.js
+├── auth.js
 ├── router/index.js
 ├── views/
 └── App.vue

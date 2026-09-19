@@ -2,7 +2,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
-        <div class="footer-brand"><span class="brand-mark">P</span><strong>PsicoConecta</strong></div>
+        <div class="footer-brand"><img class="brand-logo" src="/logo-psicoconecta.svg" alt="" /><strong>PsicoConecta</strong></div>
         <p>Proyecto académico de una plataforma de servicios de bienestar emocional en Guadalajara, Jalisco.</p>
       </div>
       <div>
@@ -15,6 +15,7 @@
         <h3>Información</h3>
         <RouterLink to="/nosotros">Quiénes somos</RouterLink>
         <RouterLink to="/contacto">Contacto</RouterLink>
+        <RouterLink to="/nosotros#ubicacion">Ubicación</RouterLink>
         <span>Guadalajara, Jalisco</span>
       </div>
       <div class="footer-note">
