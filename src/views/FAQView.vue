@@ -14,6 +14,25 @@ const faqs = [
   ['¿La terapia es solo para situaciones graves?', 'No. La atención psicológica también puede ayudar en prevención, manejo del estrés, desarrollo personal, relaciones, toma de decisiones y bienestar emocional.'],
   ['¿Qué hago si estoy en una situación de emergencia?', 'PsicoConecta no sustituye los servicios de emergencia. Si existe riesgo inmediato para ti o para otra persona, busca apoyo de los servicios de emergencia de tu localidad.'],
 ]
+const storageKey = 'psicoconecta-foro-v1'
+function readQuestions() {
+  try {
+    const value = JSON.parse(localStorage.getItem(storageKey) || '[]')
+    return Array.isArray(value) ? value.filter(item => item && typeof item.question === 'string').slice(0, 30) : []
+  } catch { return [] }
+}
+const questions = ref(readQuestions())
+const question = ref('')
+const author = ref('')
+function submitQuestion() {
+  const text = question.value.trim()
+  if (text.length < 10 || text.length > 500) return
+  questions.value.unshift({ id: crypto.randomUUID(), question: text, author: author.value.trim().slice(0, 40) || 'Anónimo', date: new Date().toLocaleDateString('es-MX') })
+  questions.value = questions.value.slice(0, 30)
+  localStorage.setItem(storageKey, JSON.stringify(questions.value))
+  question.value = ''
+  author.value = ''
+}
 </script>
 
 <template>
@@ -43,6 +62,32 @@ const faqs = [
         <p>Explora nuestros servicios, consulta los perfiles profesionales o envíanos un mensaje.</p>
         <RouterLink class="btn btn-primary full" to="/contacto">Contactar</RouterLink>
       </aside>
+    </div>
+  </section>
+  <section class="section-pad top-tight forum-section" id="foro">
+    <div class="container">
+      <span class="eyebrow">Participa</span>
+      <h2>Foro de preguntas</h2>
+      <p class="forum-intro">Comparte una pregunta general sobre los servicios. Este foro es una demostración académica: las preguntas se guardan únicamente en este navegador y no reciben respuesta profesional.</p>
+      <div class="forum-grid">
+        <form class="card forum-form" @submit.prevent="submitQuestion">
+          <h3>Publicar una pregunta</h3>
+          <label for="forum-name">Nombre o alias</label>
+          <input id="forum-name" v-model="author" maxlength="40" placeholder="Opcional" />
+          <label for="forum-question">Tu pregunta</label>
+          <textarea id="forum-question" v-model="question" minlength="10" maxlength="500" rows="5" required placeholder="Escribe una pregunta general, sin datos personales ni información clínica"></textarea>
+          <small>{{ question.length }}/500 caracteres</small>
+          <button class="btn btn-primary" type="submit">Publicar pregunta</button>
+        </form>
+        <div class="forum-posts" aria-live="polite">
+          <h3>Preguntas compartidas</h3>
+          <p v-if="!questions.length" class="card forum-empty">Aún no hay preguntas en este navegador. Puedes publicar la primera.</p>
+          <article v-for="item in questions" :key="item.id" class="card forum-post">
+            <p>{{ item.question }}</p>
+            <small>{{ item.author }} · {{ item.date }}</small>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 </template>
