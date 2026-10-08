@@ -380,3 +380,27 @@ th { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-s
 .social-links a, .social-links button { display: inline-flex; align-items: center; border: 1px solid #647394; border-radius: 10px; padding: 7px 10px; background: transparent; color: #e7eeff; font-size: .86rem; cursor: pointer; margin: 0; }
 .social-links a:hover, .social-links button:hover { background: #2b406a; }
 @media (max-width: 680px) { .forum-grid { grid-template-columns: 1fr; } }
+
+/* Sprint 3: slider y valoración de páginas */
+.showcase-section { background: #f4f8fe; }
+.showcase-counter { font-weight: 700; color: #547093; letter-spacing: .12em; }
+.showcase-frame { position: relative; height: 380px; overflow: hidden; border-radius: 26px; background: #e2eff9; box-shadow: 0 18px 50px rgba(30,55,90,.12); }
+.showcase-slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s ease; }
+.showcase-slide.is-active { opacity: 1; visibility: visible; z-index: 1; }
+.showcase-slide img { width: 100%; height: 100%; object-fit: cover; }
+.showcase-content { padding: 50px 62px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; background: #fff; }
+.showcase-content h3 { color: #183764; font-size: clamp(1.7rem, 2.7vw, 2.7rem); line-height: 1.15; margin: 16px 0; }
+.showcase-content p { color: #586b80; line-height: 1.65; margin-bottom: 20px; }
+.showcase-arrow { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); height: 42px; width: 42px; background: rgba(255,255,255,.93); border: 1px solid #d3deea; color: #244e86; font-size: 2rem; line-height: 1; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px #233c5c22; }
+.showcase-prev { left: 14px; }.showcase-next { right: 14px; }
+.showcase-dots { display: flex; justify-content: center; gap: 9px; padding-top: 18px; }
+.showcase-dots button { height: 10px; width: 10px; border: none; border-radius: 999px; background: #b7cbe0; cursor: pointer; transition: width .2s; }
+.showcase-dots button.is-active { width: 28px; background: #357dbb; }
+.rating-section { background: #eef5fc; }
+.rating-panel { display: grid; grid-template-columns: 1.6fr 1fr; align-items: center; gap: 30px; padding: 38px; }
+.rating-panel h2 { color: #19385f; margin: 12px 0; }.rating-panel p { color: #5a6d83; line-height: 1.6; }
+.rating-control { text-align: center; }.rating-stars { display: flex; justify-content: center; gap: 4px; }
+.rating-stars button { border: 0; background: transparent; color: #b3bfd0; font-size: clamp(2.2rem,4vw,3.5rem); cursor: pointer; padding: 0 2px; transition: color .15s, transform .15s; }
+.rating-stars button.selected { color: #edae38; }.rating-stars button:hover { transform: scale(1.12); }
+.rating-feedback { font-weight: 600; font-size: .92rem; margin: 8px 0; }.rating-reset { color: #246eac; border: 0; background: none; text-decoration: underline; cursor: pointer; font-size: .84rem; }
+@media (max-width: 760px) { .showcase-frame { height: 560px; } .showcase-slide { grid-template-columns: 1fr; grid-template-rows: 220px 1fr; } .showcase-content { padding: 24px 48px 32px; } .showcase-content h3 { margin: 8px 0; } .showcase-arrow { width: 32px; height: 32px; } .showcase-prev { left: 7px; } .showcase-next { right: 7px; } .rating-panel { grid-template-columns: 1fr; padding: 24px; } }

@@ -1,4 +1,6 @@
 <script setup>
+import ImageSlider from '../components/ImageSlider.vue'
+import PageRating from '../components/PageRating.vue'
 import ServiceCard from '../components/ServiceCard.vue'
 import PsychologistCard from '../components/PsychologistCard.vue'
 import { services } from '../data/services'
@@ -44,6 +46,8 @@ const featuredPsychologists = psychologists.slice(0, 3)
       </div>
     </div>
   </section>
+
+  <ImageSlider />
 
   <section class="stats-band">
     <div class="container stats-grid">
@@ -103,4 +107,5 @@ const featuredPsychologists = psychologists.slice(0, 3)
       <RouterLink class="btn btn-light" to="/contacto">Contacto</RouterLink>
     </div>
   </section>
+  <PageRating page-id="inicio" page-title="la página de inicio" />
 </template>

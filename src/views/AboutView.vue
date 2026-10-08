@@ -1,3 +1,7 @@
+<script setup>
+import PageRating from '../components/PageRating.vue'
+</script>
+
 <template>
   <section class="page-hero">
     <div class="container about-hero-grid">
@@ -97,4 +101,5 @@
       </div>
     </div>
   </section>
+  <PageRating page-id="nosotros" page-title="la página Quiénes somos" />
 </template>
