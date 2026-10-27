@@ -28,6 +28,7 @@ const { isAuthenticated } = useAuth()
         <RouterLink to="/psicologos" @click="closeMenu">Psicólogos</RouterLink>
         <RouterLink to="/nosotros" @click="closeMenu">Nosotros</RouterLink>
         <RouterLink to="/recursos" @click="closeMenu">Recursos</RouterLink>
+        <RouterLink to="/tienda" @click="closeMenu">Tienda</RouterLink>
         <RouterLink to="/preguntas" @click="closeMenu">FAQ</RouterLink>
         <RouterLink to="/contacto" @click="closeMenu">Contacto</RouterLink>
         <RouterLink v-if="isAuthenticated" to="/administracion" @click="closeMenu">Administración</RouterLink>

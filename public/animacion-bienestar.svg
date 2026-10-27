@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 430" role="img" aria-labelledby="titulo descripcion">
+<title id="titulo">Respirar y reconectar</title><desc id="descripcion">Persona sentada y elementos naturales en una composición tranquila.</desc>
+<defs><linearGradient id="fondo" x2="1" y2="1"><stop stop-color="#f0f3ff"/><stop offset="1" stop-color="#dcf4eb"/></linearGradient><linearGradient id="camisa" x2="1" y2="1"><stop stop-color="#657bc3"/><stop offset="1" stop-color="#3659a2"/></linearGradient></defs>
+<rect width="640" height="430" rx="36" fill="url(#fondo)"/>
+<g id="circulos-respiracion" fill="none" stroke="#64bba9" stroke-width="3" opacity=".45"><circle cx="317" cy="202" r="107"/><circle cx="317" cy="202" r="137"/><circle cx="317" cy="202" r="165"/></g>
+<ellipse cx="316" cy="357" rx="174" ry="24" fill="#becfdf" opacity=".5"/>
+<g id="persona"><path d="M262 237 Q235 238 212 307 Q199 335 240 339 L390 339 Q429 327 414 301 Q400 244 366 237Z" fill="url(#camisa)"/><path d="M277 185 C273 135 286 105 321 105 C361 107 371 142 364 183 L349 213 L290 211Z" fill="#303c5e"/><ellipse cx="319" cy="169" rx="42" ry="54" fill="#efba98"/><path d="M276 156 Q280 99 323 105 Q364 106 362 149 Q340 136 327 122 Q315 152 276 156Z" fill="#303c5e"/><path d="M303 216 L301 239 Q320 259 339 239 L336 215" fill="#e4a887"/><path d="M252 294 Q315 312 381 293" fill="none" stroke="#a8b9f1" stroke-width="7" stroke-linecap="round"/><path d="M249 324 Q288 304 319 334 Q352 303 392 325" fill="none" stroke="#d3dcf4" stroke-width="13" stroke-linecap="round"/><path d="M302 174 q8 8 16 0 M329 174 q8 8 16 0" fill="none" stroke="#704c4b" stroke-width="3" stroke-linecap="round"/><path d="M311 191 q10 8 20 0" stroke="#a76761" stroke-width="2.7" fill="none" stroke-linecap="round"/></g>
+<g id="hojas" fill="#5ca996"><path d="M112 158 Q91 111 129 89 Q154 130 112 158Z"/><path d="M500 113 Q521 70 551 108 Q538 145 500 113Z"/><path d="M505 301 Q478 266 510 241 Q535 282 505 301Z"/></g>
+<g fill="#ffffff" opacity=".9"><circle cx="185" cy="79" r="8"/><circle cx="465" cy="76" r="5"/><circle cx="480" cy="356" r="7"/></g>
+</svg>

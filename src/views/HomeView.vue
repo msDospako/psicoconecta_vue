@@ -1,5 +1,6 @@
 <script setup>
 import ImageSlider from '../components/ImageSlider.vue'
+import WellnessAnimation from '../components/WellnessAnimation.vue'
 import PageRating from '../components/PageRating.vue'
 import ServiceCard from '../components/ServiceCard.vue'
 import PsychologistCard from '../components/PsychologistCard.vue'
@@ -48,6 +49,7 @@ const featuredPsychologists = psychologists.slice(0, 3)
   </section>
 
   <ImageSlider />
+  <WellnessAnimation />
 
   <section class="stats-band">
     <div class="container stats-grid">

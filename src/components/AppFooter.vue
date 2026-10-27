@@ -9,6 +9,7 @@
         <h3>Explora</h3>
         <RouterLink to="/servicios">Servicios</RouterLink>
         <RouterLink to="/psicologos">Psicólogos</RouterLink>
+        <RouterLink to="/tienda">Tienda de bienestar</RouterLink>
         <RouterLink to="/preguntas">Preguntas frecuentes</RouterLink>
       </div>
       <div>

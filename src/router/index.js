@@ -11,6 +11,7 @@ import ContactView from '../views/ContactView.vue'
 import LoginView from '../views/LoginView.vue'
 import AdminView from '../views/AdminView.vue'
 import MultimediaView from '../views/MultimediaView.vue'
+import StoreView from '../views/StoreView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +26,7 @@ const router = createRouter({
     { path: '/nosotros', name: 'about', component: AboutView },
     { path: '/preguntas', name: 'faq', component: FAQView },
     { path: '/recursos', name: 'multimedia', component: MultimediaView },
+    { path: '/tienda', name: 'store', component: StoreView },
     { path: '/contacto', name: 'contact', component: ContactView },
     { path: '/login', name: 'login', component: LoginView },
     { path: '/administracion', name: 'admin', component: AdminView, meta: { requiresAuth: true } },
