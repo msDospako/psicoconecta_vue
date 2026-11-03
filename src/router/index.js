@@ -8,6 +8,7 @@ import AppointmentView from '../views/AppointmentView.vue'
 import AboutView from '../views/AboutView.vue'
 import FAQView from '../views/FAQView.vue'
 import ContactView from '../views/ContactView.vue'
+import LocationView from '../views/LocationView.vue'
 import LoginView from '../views/LoginView.vue'
 import AdminView from '../views/AdminView.vue'
 import MultimediaView from '../views/MultimediaView.vue'
@@ -28,6 +29,7 @@ const router = createRouter({
     { path: '/recursos', name: 'multimedia', component: MultimediaView },
     { path: '/tienda', name: 'store', component: StoreView },
     { path: '/contacto', name: 'contact', component: ContactView },
+    { path: '/ubicacion', name: 'location', component: LocationView },
     { path: '/login', name: 'login', component: LoginView },
     { path: '/administracion', name: 'admin', component: AdminView, meta: { requiresAuth: true } },
     { path: '/:pathMatch(.*)*', redirect: '/' },
