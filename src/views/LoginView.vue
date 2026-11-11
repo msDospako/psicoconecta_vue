@@ -11,18 +11,21 @@ const password = ref('')
 const show = ref(false)
 const status = ref('')
 
-function submitLogin() {
-  if (!login(email.value, password.value)) {
-    status.value = 'error'
-    return
-  }
-  status.value = 'success'
-  window.setTimeout(() => router.push(route.query.redirect || '/administracion'), 500)
-}
+const pending = ref(false)
 
-function fillAdvisorAccess() {
-  email.value = 'asesor@psicoconecta.mx'
-  password.value = 'Asesor2026!'
+async function submitLogin() {
+  pending.value = true
+  status.value = ''
+  try {
+    await login(email.value, password.value)
+    await router.push(typeof route.query.redirect === 'string' && route.query.redirect.startsWith('/administracion')
+      ? route.query.redirect
+      : '/administracion')
+  } catch (error) {
+    status.value = error.status === 401 ? error.message : 'No se pudo iniciar sesión. Intenta de nuevo.'
+  } finally {
+    pending.value = false
+  }
 }
 </script>
 
@@ -36,12 +39,9 @@ function fillAdvisorAccess() {
       <form @submit.prevent="submitLogin">
         <label>Correo<input v-model="email" type="email" autocomplete="username" placeholder="correo@psicoconecta.mx" required /></label>
         <label>Contraseña<div class="password-field"><input v-model="password" :type="show ? 'text' : 'password'" autocomplete="current-password" placeholder="Contraseña" required /><button type="button" @click="show = !show">{{ show ? 'Ocultar' : 'Mostrar' }}</button></div></label>
-        <p v-if="status === 'error'" class="alert error">El correo o la contraseña no coinciden con un usuario autorizado.</p>
-        <p v-if="status === 'success'" class="alert success">Acceso correcto. Abriendo el panel…</p>
-        <button class="btn btn-primary btn-lg full" type="submit">Iniciar sesión</button>
+        <p v-if="status" class="alert error" role="alert">{{ status }}</p>
+        <button class="btn btn-primary btn-lg full" type="submit" :disabled="pending">Iniciar sesión</button>
       </form>
-      <button class="demo-access" type="button" @click="fillAdvisorAccess">Completar acceso de demostración para la asesoría</button>
-      <small>Acceso simulado con LocalStorage para fines académicos; no debe utilizarse en producción.</small>
     </div>
   </section>
 </template>

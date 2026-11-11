@@ -1,3 +1,4 @@
+import { useAuth } from '../auth'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ServicesView from '../views/ServicesView.vue'
@@ -36,8 +37,10 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to) => {
-  if (to.meta.requiresAuth && !localStorage.getItem('psicoconecta-session')) {
+router.beforeEach(async (to) => {
+  const { restoredSession, isAuthenticated } = useAuth()
+  await restoredSession
+  if (to.meta.requiresAuth && !isAuthenticated.value) {
     return { name: 'login', query: { redirect: to.fullPath } }
   }
 })

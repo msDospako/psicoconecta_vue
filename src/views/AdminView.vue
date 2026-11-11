@@ -1,4 +1,5 @@
 <script setup>
+import ServiceManager from '../components/ServiceManager.vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../auth'
 import { demoUsers } from '../data/users'
@@ -6,8 +7,8 @@ import { demoUsers } from '../data/users'
 const router = useRouter()
 const { currentUser, logout } = useAuth()
 
-function closeSession() {
-  logout()
+async function closeSession() {
+  await logout()
   router.push('/login')
 }
 </script>
@@ -15,7 +16,7 @@ function closeSession() {
 <template>
   <section class="page-hero compact">
     <div class="container admin-heading">
-      <div><span class="eyebrow">Administración</span><h1>Panel del proyecto</h1><p>Control demostrativo de usuarios y contenidos de PsicoConecta.</p></div>
+      <div><span class="eyebrow">Administración</span><h1>Panel del proyecto</h1><p>Administra el catálogo de servicios de PsicoConecta.</p></div>
       <button class="btn btn-ghost" type="button" @click="closeSession">Cerrar sesión</button>
     </div>
   </section>
@@ -26,6 +27,7 @@ function closeSession() {
         <h2>{{ currentUser?.name }}</h2><p>{{ currentUser?.email }}</p><strong>{{ currentUser?.role }}</strong>
       </aside>
       <div>
+        <ServiceManager />
         <div class="admin-stats">
           <article class="card"><strong>{{ demoUsers.length }}</strong><span>Usuarios registrados</span></article>
           <article class="card"><strong>7</strong><span>Secciones principales</span></article>

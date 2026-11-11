@@ -1,27 +1,28 @@
 import { computed, ref } from 'vue'
-import { demoUsers, publicUser } from './data/users'
+import { api } from './api'
 
-const storageKey = 'psicoconecta-session'
-const stored = localStorage.getItem(storageKey)
-const currentUser = ref(stored ? JSON.parse(stored) : null)
+const storageKey = 'psicoconecta-token'
+const currentUser = ref(null)
+const isAuthenticated = computed(() => Boolean(currentUser.value))
+const restoredSession = sessionStorage.getItem(storageKey)
+  ? api('session').then((user) => { currentUser.value = user }).catch(() => sessionStorage.removeItem(storageKey))
+  : Promise.resolve()
 
 export function useAuth() {
-  const isAuthenticated = computed(() => Boolean(currentUser.value))
-
-  function login(email, password) {
-    const user = demoUsers.find(
-      (item) => item.email.toLowerCase() === email.trim().toLowerCase() && item.password === password,
-    )
-    if (!user) return false
-    currentUser.value = publicUser(user)
-    localStorage.setItem(storageKey, JSON.stringify(currentUser.value))
-    return true
+  async function login(email, password) {
+    const { user, token } = await api('session', { method: 'POST', body: { email, password } })
+    sessionStorage.setItem(storageKey, token)
+    currentUser.value = user
   }
 
-  function logout() {
-    currentUser.value = null
-    localStorage.removeItem(storageKey)
+  async function logout() {
+    try {
+      await api('session', { method: 'DELETE' })
+    } finally {
+      currentUser.value = null
+      sessionStorage.removeItem(storageKey)
+    }
   }
 
-  return { currentUser, isAuthenticated, login, logout }
+  return { currentUser, isAuthenticated, login, logout, restoredSession }
 }

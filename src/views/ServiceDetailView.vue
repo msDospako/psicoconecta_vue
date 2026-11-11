@@ -1,10 +1,23 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { services } from '../data/services'
+import { api } from '../api'
 
 const route = useRoute()
-const service = computed(() => services.find((s) => s.id === Number(route.params.id)))
+const service = ref(null)
+const status = ref('')
+watch(() => route.params.id, async (id, _, onCleanup) => {
+  let active = true
+  onCleanup(() => { active = false })
+  service.value = null
+  status.value = 'Cargando servicio…'
+  try {
+    const result = await api('servicios/' + encodeURIComponent(id))
+    if (active) service.value = result
+  } catch (error) {
+    if (active) status.value = error.status === 404 ? 'Servicio no encontrado' : 'No se pudo cargar el servicio.'
+  }
+}, { immediate: true })
 </script>
 
 <template>
@@ -35,5 +48,5 @@ const service = computed(() => services.find((s) => s.id === Number(route.params
       </div>
     </div>
   </section>
-  <section v-else class="section-pad"><div class="container empty-state card"><h2>Servicio no encontrado</h2><RouterLink class="btn btn-primary" to="/servicios">Volver al catálogo</RouterLink></div></section>
+  <section v-else class="section-pad"><div class="container empty-state card"><div role="status"><h2>{{ status }}</h2></div><RouterLink class="btn btn-primary" to="/servicios">Volver al catálogo</RouterLink></div></section>
 </template>

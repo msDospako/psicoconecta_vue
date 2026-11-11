@@ -4,10 +4,20 @@ import WellnessAnimation from '../components/WellnessAnimation.vue'
 import PageRating from '../components/PageRating.vue'
 import ServiceCard from '../components/ServiceCard.vue'
 import PsychologistCard from '../components/PsychologistCard.vue'
-import { services } from '../data/services'
+import { onMounted, ref } from 'vue'
+import { api } from '../api'
 import { psychologists } from '../data/psychologists'
 
-const featuredServices = services.slice(0, 4)
+const featuredServices = ref([])
+const serviceCount = ref(null)
+onMounted(async () => {
+  try {
+    const services = await api('servicios')
+    serviceCount.value = services.length
+    featuredServices.value = services.slice(0, 4)
+  }
+  catch { featuredServices.value = [] }
+})
 const featuredPsychologists = psychologists.slice(0, 3)
 </script>
 
@@ -53,7 +63,7 @@ const featuredPsychologists = psychologists.slice(0, 3)
 
   <section class="stats-band">
     <div class="container stats-grid">
-      <div><strong>20</strong><span>especialidades</span></div>
+      <div v-if="serviceCount !== null"><strong>{{ serviceCount }}</strong><span>especialidades</span></div>
       <div><strong>6</strong><span>perfiles profesionales</span></div>
       <div><strong>2</strong><span>modalidades de atención</span></div>
       <div><strong>3</strong><span>pasos para agendar</span></div>
@@ -64,7 +74,7 @@ const featuredPsychologists = psychologists.slice(0, 3)
     <div class="container">
       <div class="section-heading split-heading">
         <div><span class="eyebrow">Especialidades</span><h2>Empieza por lo que necesitas hoy</h2></div>
-        <RouterLink class="text-link" to="/servicios">Ver los 20 servicios →</RouterLink>
+        <RouterLink class="text-link" to="/servicios">Ver todos los servicios →</RouterLink>
       </div>
       <div class="card-grid four-col">
         <ServiceCard v-for="service in featuredServices" :key="service.id" :service="service" />

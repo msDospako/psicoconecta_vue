@@ -1,11 +1,12 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { services } from '../data/services'
+import { api } from '../api'
 import { psychologists } from '../data/psychologists'
 
 const route = useRoute()
-const selectedService = ref(Number(route.query.service) || services[0].id)
+const services = ref([])
+const selectedService = ref(null)
 const selectedPsychologist = ref(Number(route.query.psychologist) || psychologists[0].id)
 const modality = ref('Online')
 const date = ref('')
@@ -15,13 +16,23 @@ const email = ref('')
 const confirmed = ref(false)
 const error = ref('')
 
-const service = computed(() => services.find((s) => s.id === Number(selectedService.value)))
+const service = computed(() => services.value.find((s) => s.id === Number(selectedService.value)))
 const psychologist = computed(() => psychologists.find((p) => p.id === Number(selectedPsychologist.value)))
 const times = ['09:00', '10:00', '12:00', '16:00', '18:00']
 
+onMounted(async () => {
+  try {
+    services.value = await api('servicios')
+    selectedService.value = (services.value.find((item) => item.id === Number(route.query.service)) || services.value[0])?.id ?? null
+    if (!selectedService.value) error.value = 'El catálogo está vacío.'
+  } catch {
+    error.value = 'No se pudo cargar el catálogo.'
+  }
+})
+
 function confirm() {
   error.value = ''
-  if (!date.value || name.value.trim().length < 3 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+  if (!service.value || !date.value || name.value.trim().length < 3 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
     error.value = 'Completa fecha, nombre y un correo electrónico válido.'
     return
   }
@@ -64,7 +75,7 @@ function confirm() {
         <div class="form-grid two"><label>Nombre<input v-model="name" type="text" placeholder="Nombre completo" /></label><label>Correo<input v-model="email" type="email" placeholder="correo@ejemplo.com" /></label></div>
         <p v-if="error" class="alert error">{{ error }}</p>
         <p v-if="confirmed" class="alert success">Cita simulada confirmada. Se guardó localmente en este navegador.</p>
-        <button class="btn btn-primary btn-lg full" type="submit">Confirmar reservación</button>
+        <button class="btn btn-primary btn-lg full" type="submit" :disabled="!service">Confirmar reservación</button>
       </form>
 
       <aside class="appointment-summary card">
